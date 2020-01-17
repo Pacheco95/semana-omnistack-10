@@ -14,12 +14,9 @@ module.exports = {
     let dev = await Dev.findOne({ github_username });
 
     if (dev) {
-      console.info(`Dev "${github_username}" found in database`);
       return response.json(dev);
     }
 
-    console.info(`Dev "${github_username}" not found in database`);
-    
     const apiResponse = await axios.get(`https://api.github.com/users/${github_username}`);
   
     const { name = login, avatar_url, bio } = apiResponse.data;
@@ -37,8 +34,6 @@ module.exports = {
       bio,
       location
     };
-
-    console.info('Registering new Dev', newDev);
 
     dev = await Dev.create(newDev);
   

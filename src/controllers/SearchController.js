@@ -8,9 +8,6 @@ module.exports = {
 
     techs = techs.split(',').map(tech => tech.trim());
 
-
-    // FIXME query n funciona
-
     const query = {
       techs: {
         $in: techs
@@ -26,12 +23,7 @@ module.exports = {
       }
     }
 
-    console.log(JSON.stringify(query, null, 2));
-
     const devs = await Dev.find(query);
-
-    console.log(devs);
-
     return response.json(devs);
   }
 }

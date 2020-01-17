@@ -2,7 +2,10 @@ const mongoose = require('mongoose');
 const PointSchema = require('./utils/PointSchema');
 
 const DevSchema = new mongoose.Schema({
-  name: String,
+  name: {
+    type: String,
+    required: true
+  },
   github_username: {
     type: String,
     unique: true,
@@ -10,12 +13,23 @@ const DevSchema = new mongoose.Schema({
     dropDups: true,
     index: true
   },
-  bio: String,
-  avatar_url: String,
-  techs: [String],
+  bio: {
+    type: String,
+    required: true,
+    default: ''
+  },
+  avatar_url: {
+    type: String,
+    required: true
+  },
+  techs: {
+    type: [String],
+    default: []
+  },
   location: {
     type: PointSchema,
-    index: '2dsphere'
+    index: '2dsphere',
+    required: true
   }
 });
 
